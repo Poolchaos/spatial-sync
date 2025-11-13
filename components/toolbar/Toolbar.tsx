@@ -38,8 +38,8 @@ export function Toolbar() {
                       size="icon"
                       onClick={() => setActiveTool(tool.id)}
                       className={`transition-all ${
-                        activeTool === tool.id 
-                          ? 'shadow-md scale-105' 
+                        activeTool === tool.id
+                          ? 'shadow-md scale-105'
                           : 'hover:scale-105'
                       }`}
                     >
@@ -69,8 +69,8 @@ export function Toolbar() {
                       onClick={() => setTransformMode(tool.id)}
                       disabled={!selectedObjectId}
                       className={`transition-all relative ${
-                        transformMode === tool.id 
-                          ? 'shadow-md scale-105' 
+                        transformMode === tool.id
+                          ? 'shadow-md scale-105'
                           : 'hover:scale-105'
                       }`}
                     >

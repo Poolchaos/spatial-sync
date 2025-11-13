@@ -54,7 +54,7 @@ export default function RoomPage() {
         </div>
 
         {/* Connection Status */}
-        <Badge 
+        <Badge
           variant={isConnected ? 'default' : 'destructive'}
           className="shadow-sm"
         >

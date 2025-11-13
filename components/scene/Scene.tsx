@@ -23,10 +23,10 @@ export function Scene({ onTransformChange }: SceneProps) {
       >
         {/* Improved Lighting */}
         <ambientLight intensity={0.4} />
-        <directionalLight 
-          position={[10, 15, 5]} 
-          intensity={1.2} 
-          castShadow 
+        <directionalLight
+          position={[10, 15, 5]}
+          intensity={1.2}
+          castShadow
           shadow-mapSize={[2048, 2048]}
           shadow-camera-far={50}
           shadow-camera-left={-10}
@@ -38,8 +38,8 @@ export function Scene({ onTransformChange }: SceneProps) {
         <pointLight position={[-10, 5, -5]} intensity={0.3} color="#ffa94d" />
 
         {/* Environment */}
-        <Sky 
-          sunPosition={[100, 20, 100]} 
+        <Sky
+          sunPosition={[100, 20, 100]}
           turbidity={8}
           rayleigh={2}
         />
