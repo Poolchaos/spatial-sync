@@ -18,25 +18,43 @@ export function Scene({ onTransformChange }: SceneProps) {
       <Canvas
         camera={{ position: [10, 10, 10], fov: 50 }}
         onPointerMissed={() => selectObject(null)}
+        shadows
+        gl={{ antialias: true }}
       >
-        {/* Lighting */}
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
-        <pointLight position={[-10, -10, -5]} intensity={0.5} />
+        {/* Improved Lighting */}
+        <ambientLight intensity={0.4} />
+        <directionalLight 
+          position={[10, 15, 5]} 
+          intensity={1.2} 
+          castShadow 
+          shadow-mapSize={[2048, 2048]}
+          shadow-camera-far={50}
+          shadow-camera-left={-10}
+          shadow-camera-right={10}
+          shadow-camera-top={10}
+          shadow-camera-bottom={-10}
+        />
+        <hemisphereLight args={['#b1e1ff', '#5c7cfa', 0.3]} />
+        <pointLight position={[-10, 5, -5]} intensity={0.3} color="#ffa94d" />
 
-        {/* Sky & Grid */}
-        <Sky sunPosition={[100, 20, 100]} />
+        {/* Environment */}
+        <Sky 
+          sunPosition={[100, 20, 100]} 
+          turbidity={8}
+          rayleigh={2}
+        />
         <Grid
-          args={[20, 20]}
+          args={[30, 30]}
           cellSize={1}
-          cellThickness={0.5}
-          cellColor="#6b7280"
+          cellThickness={0.6}
+          cellColor="#9ca3af"
           sectionSize={5}
-          sectionThickness={1}
-          sectionColor="#374151"
+          sectionThickness={1.2}
+          sectionColor="#6366f1"
           fadeDistance={50}
           fadeStrength={1}
           followCamera={false}
+          infiniteGrid
         />
 
         {/* Scene Objects */}

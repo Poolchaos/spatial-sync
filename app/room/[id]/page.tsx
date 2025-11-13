@@ -3,6 +3,7 @@
 import { useParams } from 'next/navigation';
 import { Scene } from '@/components/scene/Scene';
 import { Toolbar } from '@/components/toolbar/Toolbar';
+import { UserList } from '@/components/user-list/UserList';
 import { useYjsSync } from '@/lib/hooks/use-yjs-sync';
 import { useSceneStore } from '@/lib/store/scene-store';
 import { useCallback } from 'react';
@@ -39,19 +40,55 @@ export default function RoomPage() {
   );
 
   return (
-    <div className="w-screen h-screen relative">
-      {/* Connection Status */}
-      <div className="absolute top-4 right-4 z-10">
-        <Badge variant={isConnected ? 'default' : 'destructive'}>
-          {isConnected ? 'Connected' : 'Disconnected'}
+    <div className="w-screen h-screen relative bg-gray-50 dark:bg-gray-950">
+      {/* Top Bar */}
+      <div className="absolute top-0 left-0 right-0 h-16 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 z-20 flex items-center justify-between px-6">
+        {/* Room Info */}
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
+              Collaboration Room
+            </span>
+          </div>
+        </div>
+
+        {/* Connection Status */}
+        <Badge 
+          variant={isConnected ? 'default' : 'destructive'}
+          className="shadow-sm"
+        >
+          {isConnected ? (
+            <span className="flex items-center gap-1.5">
+              <div className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
+              Connected
+            </span>
+          ) : (
+            <span className="flex items-center gap-1.5">
+              <div className="h-1.5 w-1.5 rounded-full bg-red-400" />
+              Disconnected
+            </span>
+          )}
         </Badge>
       </div>
 
       {/* Toolbar */}
       <Toolbar />
 
+      {/* User List */}
+      <UserList />
+
+      {/* Instructions Overlay (when no tool selected) */}
+      {activeTool === 'select' && (
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
+          <div className="bg-black/75 backdrop-blur-sm text-white text-sm px-4 py-2 rounded-full shadow-lg">
+            💡 Select a shape tool from the toolbar to add objects
+          </div>
+        </div>
+      )}
+
       {/* 3D Scene */}
-      <div className="w-full h-full" onClick={handleCanvasClick}>
+      <div className="w-full h-full pt-16" onClick={handleCanvasClick}>
         <Scene onTransformChange={handleTransformChange} />
       </div>
     </div>
